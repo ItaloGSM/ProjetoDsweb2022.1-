@@ -1,0 +1,15 @@
+{% block title %}Login{% endblock %}
+{% block content %}
+<body>
+    <main>
+        <p>Cadastre um comentario na noticia: {{noticia.texto}}</p>
+        <form action="{% url 'plataforma:cadastrocomentario' noticia.id %}" method="POST" id="cadastrocomentario">
+            {% csrf_token %}
+            <label for="texto">Comentario:</label>
+            <input type="texto" name="texto" id="texto" placeholder="Digite seu comentario"  required>
+            <input type="submit" value="Comentar">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </main>
+</body>
+{% endblock %}

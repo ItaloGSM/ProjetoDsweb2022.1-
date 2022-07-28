@@ -3,7 +3,7 @@
 <body>
     <main>
         <p>Cadastre uma noticia na edição {{edicao.texto}}</p>
-        <form action="{% url 'plataforma:cadastronoticia' %}" method="POST" id="cadastronoticia">
+        <form action="{% url 'plataforma:cadastronoticia' edicao.id %}" method="POST" id="cadastronoticia">
             {% csrf_token %}
             <label for="texto">Texto da noticia</label>
             <input type="texto" name="texto" id="texto" placeholder="Digite o texto da noticia"  required>

@@ -8,6 +8,9 @@
 </head>
 <body>
     <div class="center">
+        {% if request.user.colunista %}
+            <li><a href="{% url 'plataforma:logout' %}">Logout</a></li>
+        {% endif %}
         <a href= "{% url 'plataforma:index' %}">Pagina principal</a>
         {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
@@ -18,7 +21,9 @@
         {% endfor %}
     </div>
     {% if request.user.colunista %}
-    <li><a href="{% url 'plataforma:cadastronoticia' edicao.id %}">Cadastrar nova noticia nesta edição</a></li>
+        <li><a href="{% url 'plataforma:cadastronoticia' edicao.id %}">Cadastrar nova noticia nesta edição</a></li>
+    {% else %}
+        <li><a href="{% url 'plataforma:login'%}">Faça login para cadastrar uma noticia</a></li>
     {% endif %}
 </body>
 </html>
