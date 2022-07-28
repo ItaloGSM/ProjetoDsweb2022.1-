@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="center">
+        {% if request.user.colunista %}
+            <li><a href="{% url 'plataforma:logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'plataforma:login' %}">Login</a></li>
+        {% endif %}
+        <h1>EDIÇÕES:</h1>
+        {% if edicao_list %}
+            <ul>
+            {% for edicao in edicao_list %}
+                <li><a href="{% url 'plataforma:detail' edicao.id %}">{{ edicao.texto }}</a></li>
+            {% endfor %}
+            </ul>
+            <h1>NOTICIAS RECENTES:</h1>
+            <ul>
+            {% for edicao in edicao_list %}
+                {% for noticia in edicao.noticia_set.all %}
+                    <li><a href="{% url 'plataforma:detailnoticia' noticia.id %}">{{ noticia.texto }}</a></li>
+                {% endfor %}
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhuma edicao disponível</p>
+        {% endif %}
+        <a href="admin/">Admin</a>
+    </div>
+</body>
+</html>

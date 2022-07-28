@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="center">
+        <a href= "{% url 'plataforma:index' %}">Pagina principal</a>
+        <h1>{{ noticia.texto }}</h1>
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+        <u><strong>Comentarios:</strong></u>
+        {% for comentario in noticia.comentario_set.all %}
+            <li>{{ comentario.texto }}</li>
+        {% endfor %}
+    </div>
+</body>
+</html>

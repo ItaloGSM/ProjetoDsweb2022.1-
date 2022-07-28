@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="center">
+        <a href= "{% url 'plataforma:index' %}">Pagina principal</a>
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+        <h1><strong>Noticias da {{edicao.texto}}:</strong></h1>
+        {% for noticia in edicao.noticia_set.all %}
+            <li><a href="{% url 'plataforma:detailnoticia' noticia.id %}">{{ noticia.texto }}</li>
+        {% endfor %}
+    </div>
+</body>
+</html>

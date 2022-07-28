@@ -1,0 +1,19 @@
+{% block title %}Login{% endblock %}
+{% block content %}
+<body>
+    <main>
+        <p>Crie seu cadastro!</p>
+        <form action="{% url 'plataforma:cadastrocolunista' %}" method="POST" id="cadastrocolunista">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="username" name="username" id="username" placeholder="Digite seu username"  required>
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha" placeholder="Digite sua senha"  required>
+            <label for="cpf">CPF</label>
+            <input type="cpf" name="cpf" id="cpf" placeholder="Digite seu cpf"  required>
+            <input type="submit" value="Cadastrar-se">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </main>
+</body>
+{% endblock %}

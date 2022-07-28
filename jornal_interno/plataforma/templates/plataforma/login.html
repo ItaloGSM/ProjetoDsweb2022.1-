@@ -1,0 +1,18 @@
+{% block title %}Login{% endblock %}
+{% block content %}
+<body>
+    <main>
+        <p>Faça login na sua conta</p>
+        <form action="{% url 'plataforma:login' %}" method="POST" id="login">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="username" name="username" id="username" placeholder="Digite seu username"  required>
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha" placeholder="Digite sua senha"  required>
+            <input type="submit" value="Entrar">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+        <p>Não tem uma conta? <a href="{%url 'plataforma:cadastrocolunista'%}">Cadastrar-se</a></p>
+    </main>
+</body>
+{% endblock %}
