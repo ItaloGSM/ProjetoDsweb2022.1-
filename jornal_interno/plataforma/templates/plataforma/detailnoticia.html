@@ -11,16 +11,18 @@
         {% if request.user.colunista %}
             <li><a href="{% url 'plataforma:logout' %}">Logout</a></li>
         {% endif %}
-        <a href= "{% url 'plataforma:index' %}">Pagina principal</a>
+        <li><a href= "{% url 'plataforma:homejornal' %}">Pagina principal</a></li>
+        <li><a href= {% url 'plataforma:detailedicao' noticia.edicao.id %}>Voltar</a></li>
         <h1>{{ noticia.texto }}</h1>
         {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
         {% endif %}
-        <u><strong>Comentarios:</strong></u>
+        <u><strong>COMENTARIOS:</strong></u>
         {% for comentario in noticia.comentario_set.all %}
             <li>{{ comentario.texto }}</li>
         {% endfor %}
     </div>
+    <br>
     {% if request.user.colunista %}
         <li><a href="{% url 'plataforma:cadastrocomentario' noticia.id %}">Cadastrar novo comentario</a></li>
     {% else %}

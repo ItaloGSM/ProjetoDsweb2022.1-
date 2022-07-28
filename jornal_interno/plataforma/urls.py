@@ -4,9 +4,9 @@ from . import views
 app_name = 'plataforma'
 urlpatterns = [
 
-    path('', views.index, name='index'),
+    path('homejornal', views.homejornal, name='homejornal'),
     path('cadastronoticia/<int:edicao_id>/', views.CadastroNoticia.as_view(), name='cadastronoticia'),
-    path('edicao/<int:edicao_id>/', views.detail, name='detail'),
+    path('edicao/<int:edicao_id>/', views.detailedicao, name='detailedicao'),
     path('edicao/noticia/<int:noticia_id>/', views.detailnoticia, name='detailnoticia'),
 
     path('login/', views.Login.as_view(), name='login'),

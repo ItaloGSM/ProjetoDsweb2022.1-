@@ -18,7 +18,7 @@
         {% if edicao_list %}
             <ul>
             {% for edicao in edicao_list %}
-                <li><a href="{% url 'plataforma:detail' edicao.id %}">{{ edicao.texto }}</a></li>
+                <li><a href="{% url 'plataforma:detailedicao' edicao.id %}">{{ edicao.texto }}</a></li>
             {% endfor %}
             </ul>
             <h1>NOTICIAS RECENTES:</h1>

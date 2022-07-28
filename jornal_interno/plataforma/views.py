@@ -20,14 +20,14 @@ class Login(View):
         if user is not None:
             login(request, user)
             if hasattr(request.user, 'colunista'):
-                return HttpResponseRedirect(reverse('plataforma:index'))
+                return HttpResponseRedirect(reverse('plataforma:homejornal'))
         else:
             erro = 'Email e senha inválidas!'
             return render(request, 'plataforma/login.html', {'erro': erro})
 
 def logoutView(request):
     logout(request)
-    return HttpResponseRedirect(reverse('plataforma:index'))
+    return HttpResponseRedirect(reverse('plataforma:homejornal'))
 
 class CadastroColunista(View):
     def get(self, request, *args, **kwargs):
@@ -60,7 +60,7 @@ class CadastroEdicao(View):
             if hasattr(request.user, 'colunista'):
                 edicao = Edicao(colunista=request.user.colunista, texto = texto)
                 edicao.save()
-                return HttpResponseRedirect(reverse('plataforma:index'))
+                return HttpResponseRedirect(reverse('plataforma:homejornal'))
             else:
                 erro = 'Usuario não logado!'
                 return render(request, 'plataforma/login.html', {'erro': erro})
@@ -84,7 +84,7 @@ class CadastroNoticia(View):
             if hasattr(request.user, 'colunista'):
                 noticia = Noticia(colunista=request.user.colunista, texto = texto, edicao = edicao)
                 noticia.save()
-                return HttpResponseRedirect(reverse('plataforma:detail', args=(edicao_id,)))
+                return HttpResponseRedirect(reverse('plataforma:detailedicao', args=(edicao_id,)))
             else:
                 erro = 'Usuario não logado!'
                 return render(request, 'plataforma/login', {'erro': erro})
@@ -117,14 +117,14 @@ class CadastroComentario(View):
             return render(request, 'plataforma/cadastrarcomentario.html', {'erro': erro})
     
 
-def index(request):
+def homejornal(request):
     edicao_list = Edicao.objects.order_by('-data_pub')[:5]
     context = {'edicao_list': edicao_list}
-    return render(request,'plataforma/index.html', context)
+    return render(request,'plataforma/homejornal.html', context)
 
-def detail(request, edicao_id):
+def detailedicao(request, edicao_id):
     edicao = get_object_or_404(Edicao, pk=edicao_id)
-    return render(request,'plataforma/detail.html',{'edicao': edicao})
+    return render(request,'plataforma/detailedicao.html',{'edicao': edicao})
 
 def detailnoticia(request, noticia_id):
     noticia = get_object_or_404(Noticia, pk=noticia_id)

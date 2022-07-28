@@ -11,15 +11,16 @@
         {% if request.user.colunista %}
             <li><a href="{% url 'plataforma:logout' %}">Logout</a></li>
         {% endif %}
-        <a href= "{% url 'plataforma:index' %}">Pagina principal</a>
+        <li><a href= "{% url 'plataforma:homejornal' %}">Pagina principal</a></li>
         {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
         {% endif %}
-        <h1><strong>Noticias da {{edicao.texto}}:</strong></h1>
+        <h1><strong>Noticias da edição {{edicao.texto}}:</strong></h1>
         {% for noticia in edicao.noticia_set.all %}
             <li><a href="{% url 'plataforma:detailnoticia' noticia.id %}">{{ noticia.texto }}</li>
         {% endfor %}
     </div>
+    <br>
     {% if request.user.colunista %}
         <li><a href="{% url 'plataforma:cadastronoticia' edicao.id %}">Cadastrar nova noticia nesta edição</a></li>
     {% else %}
