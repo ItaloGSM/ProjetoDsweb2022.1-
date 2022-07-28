@@ -1,0 +1,15 @@
+{% block title %}Login{% endblock %}
+{% block content %}
+<body>
+    <main>
+        <p>Cadastre uma noticia na edição {{edicao.texto}}</p>
+        <form action="{% url 'plataforma:cadastronoticia' %}" method="POST" id="cadastronoticia">
+            {% csrf_token %}
+            <label for="texto">Texto da noticia</label>
+            <input type="texto" name="texto" id="texto" placeholder="Digite o texto da noticia"  required>
+            <input type="submit" value="Cadastrar noticia">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </main>
+</body>
+{% endblock %}

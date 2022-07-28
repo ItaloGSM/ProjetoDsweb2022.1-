@@ -51,7 +51,7 @@ class CadastroEdicao(View):
     def get(self, request, *args, **kwargs):
         colunista = request.user.colunista
         contexto = {'colunista': colunista}
-        return render(request, 'plataforma/cadastroedicao.html', contexto)
+        return render(request, 'plataforma/cadastraredicao.html', contexto)
 
     def post(self, request, *args, **kwargs):
         texto = request.POST['texto']
@@ -60,24 +60,25 @@ class CadastroEdicao(View):
             if hasattr(request.user, 'colunista'):
                 edicao = Edicao(colunista=request.user.colunista, texto = texto)
                 edicao.save()
-                return HttpResponseRedirect(reverse('index'))
+                return HttpResponseRedirect(reverse('plataforma:index'))
             else:
                 erro = 'Usuario não logado!'
-                return render(request, 'login', {'erro': erro})
+                return render(request, 'plataforma/login.html', {'erro': erro})
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            return render(request, 'plataforma/cadastroedicao.html', {'erro': erro})
+            return render(request, 'plataforma/cadastraredicao.html', {'erro': erro})
 
 @method_decorator(login_required(login_url="/login/"), name='dispatch')
 class CadastroNoticia(View):
     def get(self, request, *args, **kwargs):
         colunista = request.user.colunista
-        contexto = {'colunista': colunista}
-        return render(request, 'plataforma/cadastronoticia.html', contexto)
+        edicao = get_object_or_404(Edicao, pk=request.POST.get('edicao_id'))
+        contexto = {'colunista': colunista,'edicao': edicao}
+        return render(request, 'plataforma/cadastrarnoticia.html', contexto)
 
     def post(self, request, *args, **kwargs):
         texto = request.POST['texto']
-        edicao = get_object_or_404(Edicao, pk=request.POST.get('edicao_id'))
+        edicao = get_object_or_404(Edicao, pk=request.POST.get('edica_id'))
 
         if texto:
             if hasattr(request.user, 'colunista'):
@@ -89,7 +90,7 @@ class CadastroNoticia(View):
                 return render(request, 'plataforma/login', {'erro': erro})
         else:
             erro = 'Informe corretamente os parâmetros necessários!'
-            return render(request, 'plataforma/cadastroedicao.html', {'erro': erro})
+            return render(request, 'plataforma/cadastrarnoticia.html', {'erro': erro})
 
 @method_decorator(login_required(login_url="/login/"), name='dispatch')
 class CadastroComentario(View):

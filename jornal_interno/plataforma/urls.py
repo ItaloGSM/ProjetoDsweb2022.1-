@@ -5,6 +5,7 @@ app_name = 'plataforma'
 urlpatterns = [
 
     path('', views.index, name='index'),
+    path('cadastronoticia/<int:edicao_id>/', views.CadastroNoticia.as_view(), name='cadastronoticia'),
     path('edicao/<int:edicao_id>/', views.detail, name='detail'),
     path('edicao/noticia/<int:noticia_id>/', views.detailnoticia, name='detailnoticia'),
 
@@ -12,7 +13,6 @@ urlpatterns = [
     path('logout/', views.logoutView, name='logout'),
 
     path('cadastroedicao/', views.CadastroEdicao.as_view(), name='cadastroedicao'),
-    path('cadastronoticia/', views.CadastroNoticia.as_view(), name='cadastronoticia'),
-    path('cadastrocomentario/', views.CadastroComentario.as_view(), name='cadastrocomentario'),
+    path('cadastrocomentario/<int:noticia_id>/', views.CadastroComentario.as_view(), name='cadastrocomentario'),
     path('cadastrocolunista/', views.CadastroColunista.as_view(),name='cadastrocolunista'),
 ]

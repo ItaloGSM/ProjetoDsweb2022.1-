@@ -1,0 +1,15 @@
+{% block title %}Login{% endblock %}
+{% block content %}
+<body>
+    <main>
+        <p>Cadastre uma nova edição!</p>
+        <form action="{% url 'plataforma:cadastroedicao' %}" method="POST" id="cadastroedicao">
+            {% csrf_token %}
+            <label for="texto">Texto</label>
+            <input type="texto" name="texto" id="texto" placeholder="Digite o texto da edição"  required>
+            <input type="submit" value="Cadastrar edição">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </main>
+</body>
+{% endblock %}

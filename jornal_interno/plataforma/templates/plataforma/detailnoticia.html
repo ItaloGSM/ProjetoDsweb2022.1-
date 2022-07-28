@@ -18,5 +18,8 @@
             <li>{{ comentario.texto }}</li>
         {% endfor %}
     </div>
+    {% if request.user.colunista %}
+    <li><a href="{% url 'plataforma:cadastrocomentario' noticia.id %}">Cadastrar novo comentario</a></li>
+    {% endif %}
 </body>
 </html>

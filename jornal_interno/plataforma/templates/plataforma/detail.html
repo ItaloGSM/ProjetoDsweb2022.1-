@@ -17,5 +17,8 @@
             <li><a href="{% url 'plataforma:detailnoticia' noticia.id %}">{{ noticia.texto }}</li>
         {% endfor %}
     </div>
+    {% if request.user.colunista %}
+    <li><a href="{% url 'plataforma:cadastronoticia' edicao.id %}">Cadastrar nova noticia nesta edição</a></li>
+    {% endif %}
 </body>
 </html>
